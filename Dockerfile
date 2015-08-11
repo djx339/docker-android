@@ -63,9 +63,6 @@ RUN cd /opt \
     && rm -f gradle.zip \
     && chown -R root.root gradle-${GRADLE_VERSION}
 
-# Install sdk elements
-RUN echo y | android --verbose update sdk --all --no-ui --filter "platform-tools,tools,build-tools-22.0.1,android-19,addon-google_apis-google-19,addon-google_apis_x86-google-19,extra-android-m2repository,extra-android-support,extra-google-m2repository"
-
 # Setup environment
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_NDK_HOME /opt/android-ndk-${ANDROID_NDK_VERSION}
@@ -77,3 +74,6 @@ ENV PATH ${PATH}:${ANDROID_NDK_HOME}
 ENV PATH ${PATH}:${ANT_HOME}/bin
 ENV PATH ${PATH}:${MAVEN_HOME}/bin
 ENV PATH ${PATH}:${GRADLE_HOME}/bin
+
+# Install sdk elements
+RUN echo y | android --verbose update sdk --all --no-ui --filter "platform-tools,tools,build-tools-22.0.1,android-19,addon-google_apis-google-19,addon-google_apis_x86-google-19,extra-android-m2repository,extra-android-support,extra-google-m2repository"
